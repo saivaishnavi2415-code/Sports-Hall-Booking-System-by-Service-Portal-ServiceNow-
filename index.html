@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Zone - Booking Portal</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ServiceNow Header Navigation -->
+    <header class="portal-header">
+        <div class="header-container">
+            <a href="#" class="navbar-brand">
+                Sports <span class="zone-text">Zone</span>
+            </a>
+            <nav class="portal-nav">
+                <a href="#explore" class="nav-item active" id="btn-nav-book"><i class="fa-solid fa-calendar-days"></i> Book Venue</a>
+                <a href="#bookings" class="nav-item" id="btn-nav-history"><i class="fa-solid fa-list-check"></i> My Bookings</a>
+                <a href="#help" class="nav-item"><i class="fa-solid fa-circle-question"></i> Help</a>
+            </nav>
+            <div class="user-profile">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80" alt="User Avatar" class="user-avatar">
+                <span class="user-name">System Administrator</span>
+            </div>
+        </div>
+    </header>
+    <!-- Main Container -->
+    <main class="main-container">
+        
+        <!-- Dashboard Section: Hero & Sport Selector -->
+        <section id="explore-section" class="portal-section active">
+            <!-- Hero Banner -->
+            <div class="hero-banner">
+                <div class="hero-content">
+                    <div class="sporthub-badge">
+                        <i class="fa-solid fa-circle-nodes"></i> SportHub <span>Book. Play. Win.</span>
+                    </div>
+                    <h1>Find Your Perfect Sports Venue</h1>
+                    <p>Book badminton courts, basketball courts, table tennis tables, and cricket fields instantly. Real-time availability checks and automated confirmations.</p>
+                    <a href="#sports-selector" class="btn btn-primary btn-explore">Explore Venues <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="hero-graphics">
+                    <div class="sport-icon-card sport-basketball float-1">
+                        <i class="fa-solid fa-basketball"></i>
+                    </div>
+                    <div class="sport-icon-card sport-tennis float-2">
+                        <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+                    </div>
+                    <div class="sport-icon-card sport-football float-3">
+                        <i class="fa-solid fa-futbol"></i>
+                    </div>
+                    <div class="sport-icon-card sport-badminton float-4">
+                        <i class="fa-solid fa-solid fa-circle-notch"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- Sports Selector Grid -->
+            <div id="sports-selector" class="sports-selector-container">
+                <div class="section-header">
+                    <h2>Select Sport</h2>
+                    <p>Choose your sport to view available halls and start booking</p>
+                </div>
+                <div class="sports-grid">
+                    <div class="sport-card" data-sport="Badminton" data-rate="15">
+                        <div class="card-icon"><i class="fa-solid fa-baseball-bat-ball"></i></div>
+                        <h3>Badminton</h3>
+                        <p>Indoor court with premium synthetic mats</p>
+                        <span class="price-rate">$15.00/hour</span>
+                    </div>
+                    <div class="sport-card" data-sport="Basketball" data-rate="25">
+                        <div class="card-icon"><i class="fa-solid fa-basketball"></i></div>
+                        <h3>Basketball</h3>
+                        <p>Full-size wooden court with adjustable hoops</p>
+                        <span class="price-rate">$25.00/hour</span>
+                    </div>
+                    <div class="sport-card" data-sport="Table Tennis" data-rate="10">
+                        <div class="card-icon"><i class="fa-solid fa-table-tennis-paddle-ball"></i></div>
+                        <h3>Table Tennis</h3>
+                        <p>Professional ITTF-approved indoor tables</p>
+                        <span class="price-rate">$10.00/hour</span>
+                    </div>
+                    <div class="sport-card" data-sport="Futsal / Soccer" data-rate="30">
+                        <div class="card-icon"><i class="fa-solid fa-futbol"></i></div>
+                        <h3>Futsal / Soccer</h3>
+                        <p>Artificial turf with high-intensity floodlights</p>
+                        <span class="price-rate">$30.00/hour</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Booking details page & Payment page (multi-step form) -->
+        <section id="booking-wizard-section" class="portal-section">
+            <div class="wizard-container">
+                <!-- Wizard Progress Steps -->
+                <div class="wizard-steps">
+                    <div class="step-indicator active" id="step-info">
+                        <span class="step-num">1</span>
+                        <span class="step-label">Booking Info</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step-indicator" id="step-payment">
+                        <span class="step-num">2</span>
+                        <span class="step-label">Secure Payment</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step-indicator" id="step-confirm">
+                        <span class="step-num">3</span>
+                        <span class="step-label">Confirmation</span>
+                    </div>
+                </div>
+                <!-- Step 1: Info Screen -->
+                <div class="wizard-pane active" id="pane-info">
+                    <div class="wizard-split">
+                        <div class="wizard-form-part">
+                            <h3>Enter Booking Details</h3>
+                            <form id="booking-info-form">
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="sport-display">Selected Sport</label>
+                                        <input type="text" id="sport-display" class="form-control" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="hall-select">Sports Hall Name</label>
+                                        <select id="hall-select" class="form-control" required>
+                                            <option value="">-- Select Sports Hall --</option>
+                                            <option value="Elite Sports Arena - Court A">Elite Sports Arena - Court A</option>
+                                            <option value="Elite Sports Arena - Court B">Elite Sports Arena - Court B</option>
+                                            <option value="Grand Dome Hall">Grand Dome Hall</option>
+                                            <option value="Champion Arena">Champion Arena</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="booking-date">Booking Date</label>
+                                        <input type="date" id="booking-date" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="purpose">Booking Purpose</label>
+                                        <input type="text" id="purpose" class="form-control" placeholder="e.g. Friendly Match, Practice" required>
+                                    </div>
+                                </div>
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="start-time">Start Time</label>
+                                        <select id="start-time" class="form-control" required>
+                                            <option value="">-- Start Time --</option>
+                                            <option value="08:00">08:00 AM</option>
+                                            <option value="09:00">09:00 AM</option>
+                                            <option value="10:00">10:00 AM</option>
+                                            <option value="11:00">11:00 AM</option>
+                                            <option value="12:00">12:00 PM</option>
+                                            <option value="13:00">01:00 PM</option>
+                                            <option value="14:00">02:00 PM</option>
+                                            <option value="15:00">03:00 PM</option>
+                                            <option value="16:00">04:00 PM</option>
+                                            <option value="17:00">05:00 PM</option>
+                                            <option value="18:00">06:00 PM</option>
+                                            <option value="19:00">07:00 PM</option>
+                                            <option value="20:00">08:00 PM</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="end-time">End Time</label>
+                                        <select id="end-time" class="form-control" required>
+                                            <option value="">-- End Time --</option>
+                                            <option value="09:00">09:00 AM</option>
+                                            <option value="10:00">10:00 AM</option>
+                                            <option value="11:00">11:00 AM</option>
+                                            <option value="12:00">12:00 PM</option>
+                                            <option value="13:00">01:00 PM</option>
+                                            <option value="14:00">02:00 PM</option>
+                                            <option value="15:00">03:00 PM</option>
+                                            <option value="16:00">04:00 PM</option>
+                                            <option value="17:00">05:00 PM</option>
+                                            <option value="18:00">06:00 PM</option>
+                                            <option value="19:00">07:00 PM</option>
+                                            <option value="20:00">08:00 PM</option>
+                                            <option value="21:00">09:00 PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="contact-name">Booked By (Contact Name)</label>
+                                        <input type="text" id="contact-name" class="form-control" value="System Administrator" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contact-email">Email Address</label>
+                                        <input type="email" id="contact-email" class="form-control" value="admin@sportszone.com" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="instructions">Special Instructions</label>
+                                    <textarea id="instructions" class="form-control" rows="3" placeholder="Enter special setup requests, extra equipment needs, etc."></textarea>
+                                </div>
+                                <div class="wizard-actions">
+                                    <button type="button" class="btn btn-secondary btn-cancel-booking">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Proceed to Payment <i class="fa-solid fa-arrow-right"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="wizard-summary-part">
+                            <div class="summary-card">
+                                <h4>Booking Summary</h4>
+                                <div class="summary-img-placeholder" id="summary-sport-img">
+                                    <!-- Dynamic graphic -->
+                                </div>
+                                <div class="summary-details">
+                                    <div class="summary-row">
+                                        <span>Sport Type:</span>
+                                        <strong id="sum-sport-type">-</strong>
+                                    </div>
+                                    <div class="summary-row">
+                                        <span>Venue Rate:</span>
+                                        <strong id="sum-venue-rate">-</strong>
+                                    </div>
+                                    <div class="summary-row">
+                                        <span>Duration:</span>
+                                        <strong id="sum-duration">-</strong>
+                                    </div>
+                                    <hr>
+                                    <div class="summary-row total-row">
+                                        <span>Estimated Payment:</span>
+                                        <strong id="sum-total-amount">$0.00</strong>
+                                    </div>
+                                </div>
+                                <div class="booking-notes">
+                                    <h5>Booking Policies</h5>
+                                    <ul>
+                                        <li>Real-time availability is checked when proceeding to payment.</li>
+                                        <li>Cancellations are subject to a <strong>10% cancellation charge</strong>.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 2: Payment Screen -->
+                <div class="wizard-pane" id="pane-payment">
+                    <div class="wizard-split">
+                        <div class="wizard-form-part">
+                            <h3>Complete Secure Payment</h3>
+                            <p class="payment-intro">Enter payment details to complete the facility reservation.</p>
+                            
+                            <form id="payment-form">
+                                <div class="payment-methods">
+                                    <label class="pay-method-card active">
+                                        <input type="radio" name="payment_method" value="Credit Card" checked>
+                                        <div class="method-details">
+                                            <i class="fa-solid fa-credit-card"></i>
+                                            <span>Credit Card</span>
+                                        </div>
+                                    </label>
+                                    <label class="pay-method-card">
+                                        <input type="radio" name="payment_method" value="UPI">
+                                        <div class="method-details">
+                                            <i class="fa-solid fa-mobile-screen-button"></i>
+                                            <span>UPI Apps</span>
+                                        </div>
+                                    </label>
+                                    <label class="pay-method-card">
+                                        <input type="radio" name="payment_method" value="Net Banking">
+                                        <div class="method-details">
+                                            <i class="fa-solid fa-building-columns"></i>
+                                            <span>Net Banking</span>
+                                        </div>
+                                    </label>
+                                </div>
+                                <!-- Credit Card Fields -->
+                                <div id="credit-card-fields" class="payment-fields-group active">
+                                    <div class="form-group">
+                                        <label for="card-num">Card Number</label>
+                                        <div class="input-with-icon">
+                                            <i class="fa-solid fa-credit-card input-icon"></i>
+                                            <input type="text" id="card-num" class="form-control" placeholder="4532 •••• •••• 8824">
+                                        </div>
+                                    </div>
+                                    <div class="form-group-row">
+                                        <div class="form-group">
+                                            <label for="card-expiry">Expiry Date</label>
+                                            <input type="text" id="card-expiry" class="form-control" placeholder="MM/YY">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="card-cvv">CVV</label>
+                                            <input type="password" id="card-cvv" class="form-control" placeholder="•••">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- UPI Fields -->
+                                <div id="upi-fields" class="payment-fields-group">
+                                    <div class="form-group">
+                                        <label for="upi-id">UPI ID / VPA</label>
+                                        <input type="text" id="upi-id" class="form-control" placeholder="username@upi">
+                                    </div>
+                                </div>
+                                <!-- Net Banking Fields -->
+                                <div id="net-banking-fields" class="payment-fields-group">
+                                    <div class="form-group">
+                                        <label for="bank-select">Select Bank</label>
+                                        <select id="bank-select" class="form-control">
+                                            <option value="">-- Choose Bank --</option>
+                                            <option value="HDFC Bank">HDFC Bank</option>
+                                            <option value="State Bank of India">State Bank of India</option>
+                                            <option value="ICICI Bank">ICICI Bank</option>
+                                            <option value="Axis Bank">Axis Bank</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="wizard-actions">
+                                    <button type="button" class="btn btn-secondary btn-back-to-info"><i class="fa-solid fa-arrow-left"></i> Edit Details</button>
+                                    <button type="submit" class="btn btn-primary" id="btn-submit-booking">Submit Payment & Book</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="wizard-summary-part">
+                            <div class="summary-card payment-summary">
+                                <h4>Checkout Summary</h4>
+                                <div class="checkout-breakdown">
+                                    <div class="checkout-item">
+                                        <span>Sport Type:</span>
+                                        <span id="check-sport">-</span>
+                                    </div>
+                                    <div class="checkout-item">
+                                        <span>Location:</span>
+                                        <span id="check-hall">-</span>
+                                    </div>
+                                    <div class="checkout-item">
+                                        <span>Date & Time:</span>
+                                        <span id="check-date-time">-</span>
+                                    </div>
+                                    <div class="checkout-item">
+                                        <span>Duration:</span>
+                                        <span id="check-duration">-</span>
+                                    </div>
+                                    <hr>
+                                    <div class="checkout-total">
+                                        <span>Total Amount Due:</span>
+                                        <span id="check-total-amount">$0.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 3: Confirmation Screen -->
+                <div class="wizard-pane" id="pane-confirm">
+                    <div class="confirmation-container">
+                        <div class="success-icon-animation">
+                            <div class="checkmark-circle">
+                                <div class="checkmark-stem"></div>
+                                <div class="checkmark-kick"></div>
+                            </div>
+                        </div>
+                        <h2>Booking Confirmed Successfully!</h2>
+                        <p class="conf-intro">Your transaction was successful, and your slot is reserved. A confirmation email with venue details has been sent to <strong id="conf-email-addr">-</strong>.</p>
+                        
+                        <div class="receipt-card">
+                            <div class="receipt-header">
+                                <span>Reservation Details</span>
+                                <span class="receipt-id" id="conf-sys-id">Sys ID: -</span>
+                            </div>
+                            <div class="receipt-body">
+                                <div class="receipt-grid">
+                                    <div class="receipt-item">
+                                        <span>Sports Hall</span>
+                                        <strong id="conf-hall-name">-</strong>
+                                    </div>
+                                    <div class="receipt-item">
+                                        <span>Sport</span>
+                                        <strong id="conf-sport-type">-</strong>
+                                    </div>
+                                    <div class="receipt-item">
+                                        <span>Date & Duration</span>
+                                        <strong id="conf-duration">-</strong>
+                                    </div>
+                                    <div class="receipt-item">
+                                        <span>Status</span>
+                                        <span class="status-badge approved">Approved</span>
+                                    </div>
+                                    <div class="receipt-item">
+                                        <span>Paid Amount</span>
+                                        <strong id="conf-payment">-</strong>
+                                    </div>
+                                    <div class="receipt-item">
+                                        <span>Transaction ID</span>
+                                        <strong id="conf-transaction-num">-</strong>
+                                    </div>
+                                </div>
+                                <div class="receipt-instructions">
+                                    <span>Special Instructions:</span>
+                                    <p id="conf-instructions">-</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wizard-actions centered-actions">
+                            <button type="button" class="btn btn-secondary" id="btn-back-home"><i class="fa-solid fa-home"></i> Back to Portal</button>
+                            <button type="button" class="btn btn-primary" id="btn-view-bookings"><i class="fa-solid fa-list-check"></i> View My Bookings</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Bookings History List & Simulation Controls (Business Rules, Scheduled Jobs) -->
+        <section id="bookings-section" class="portal-section">
+            <div class="history-grid-container">
+                <!-- Bookings History -->
+                <div class="bookings-history-card">
+                    <div class="card-header-flex">
+                        <h2>My Reservations</h2>
+                        <span class="bookings-count" id="lbl-booking-count">0 Bookings</span>
+                    </div>
+                    <div class="bookings-list" id="bookings-list-container">
+                        <!-- Bookings will be dynamically populated here -->
+                        <div class="empty-state">
+                            <i class="fa-regular fa-calendar-times"></i>
+                            <p>No sports hall bookings found. Explore venues to make your first reservation.</p>
+                            <button class="btn btn-primary btn-explore-redirect">Book a Court</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Simulation Panel: Scheduled Jobs & Business Rules execution -->
+                <div class="simulation-card">
+                    <div class="sim-header">
+                        <h3>ServiceNow Logic Simulator</h3>
+                        <p>Simulate how backend ServiceNow configurations run on your bookings.</p>
+                    </div>
+                    <div class="sim-body">
+                        <!-- Business Rule Simulation Details -->
+                        <div class="sim-group">
+                            <div class="sim-group-header">
+                                <i class="fa-solid fa-gears"></i>
+                                <div>
+                                    <h4>Cancellation Business Rule</h4>
+                                    <span>Deducts 10% fee and returns balance</span>
+                                </div>
+                            </div>
+                            <p class="sim-desc">When you click "Cancel Booking" in your history, a <code>before update</code> Business Rule triggers on <code>u_sports_hall_bookings</code>, calculates the 10% fee, and stores the remainder in the <code>Refund Payment</code> field.</p>
+                        </div>
+                        <!-- Scheduled Job Simulation -->
+                        <div class="sim-group">
+                            <div class="sim-group-header">
+                                <i class="fa-solid fa-clock"></i>
+                                <div>
+                                    <h4>Scheduled Reminder Job</h4>
+                                    <span>Triggers event 5-7 mins before start time</span>
+                                </div>
+                            </div>
+                            <p class="sim-desc">Normally runs every 30 minutes. Evaluates if booking status is <code>pending</code>, reminder is unsent, and start time is 5-7 minutes away. Fictionalizes the event trigger and updates record instructions.</p>
+                            <button type="button" class="btn btn-simulation" id="btn-run-scheduled-job">
+                                <i class="fa-solid fa-play"></i> Run Scheduled Job Simulation
+                            </button>
+                        </div>
+                        <!-- Toast notifications list for background notifications -->
+                        <div class="system-logs">
+                            <h5>System Action Logs (gs.info)</h5>
+                            <div class="logs-container" id="logs-container">
+                                <div class="log-entry system">System initialized. Awaiting booking requests...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Interactive JS scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
